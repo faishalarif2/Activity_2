@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     EditText edemail, edpassword;
 
     //Deklarasi variabel untuk menyimpan email dan password
-    String email, password;
+    String nama, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,30 +39,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                email = edemail.getText().toString();
+                nama = edemail.getText().toString();
                 password = edpassword.getText().toString();
 
+                String email = "admin@mail.com";
+
+                String pass = "123";
+
                 if(email.isEmpty() && password.isEmpty()){
-                    edemail.setError("Email Diperlukan");
-                    edpassword.setError("Password Diperlukan");
-                }
-                else{
                     Toast t = Toast.makeText(getApplicationContext(),
-                            "email anda: " + email + " dan password anda: " + password + "", Toast.LENGTH_LONG);
-                    t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
+                            "Email dan Password wajib diisi!!!",Toast.LENGTH_LONG);
                     t.show();
-                    edemail.getText().clear();
-                }
+                } else{
 
-                if(edemail.getText().toString().equals("admin") && edpassword.getText().toString().equals("admin")){
-                    Toast.makeText(getApplicationContext(), "Login Sukses",Toast.LENGTH_LONG).show();
+                    if (nama.equals(email) && password.equals(pass)) {
+                        Toast t = Toast.makeText(getApplicationContext(),
+                                "Login Sukses", Toast.LENGTH_LONG);
+                        t.show();
+
+                        Bundle b = new Bundle();
+
+                        b.putString("a", nama.trim());
+
+                        b.putString("b", password.trim());
+
+                        Intent i = new Intent(getApplicationContext(), ActivityKedua.class);
+
+                        i.putExtras(b);
+
+                        startActivity(i);
+                    }else {
+                        Toast t = Toast.makeText(getApplicationContext(),
+                                "Login Gagal",Toast.LENGTH_LONG);
+                        t.show();
+
+                    }
 
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Email dan Password Anda Salah",
-                            Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
     }
