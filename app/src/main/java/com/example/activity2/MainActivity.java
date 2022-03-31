@@ -97,4 +97,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    Intent i = new Intent(getApplicationContext(), Home_Activity.class);
 }
